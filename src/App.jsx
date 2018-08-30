@@ -23,7 +23,12 @@ class App extends Component {
     }
 
     deletePersonHandler = (personIndex) => {
-        const persons = this.state.persons;
+
+        //const persons = this.state.persons; // references state directly which will mutate it - WRONG!!
+        //const persons = this.state.persons.slice(); // pre ES6 fix to this issue
+
+        const persons = [...this.state.persons]; // ES6
+
         persons.splice(personIndex, 1);
         this.setState({ persons: persons });
     }
