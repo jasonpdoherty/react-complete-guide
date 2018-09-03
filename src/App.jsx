@@ -5,21 +5,26 @@ import Person from "./Person/person"
 class App extends Component {
     state = {
         persons: [
-            {id: 1, name: 'Jason', age: 37 },
-            {id: 2, name: 'Jack', age: 7 },
-            {id: 3, name: 'Harry', age: 4 }
+            { id: 1, name: 'Jason', age: 37 },
+            { id: 2, name: 'Jack', age: 7 },
+            { id: 3, name: 'Harry', age: 4 }
         ],
         showPersons: false
     };
 
-    namedChangedHandler = (event) => {
-        this.setState({
-            persons: [
-                { name: 'Jason', age: 39 },
-                { name: event.target.value, age: 7 },
-                { name: 'Harry', age: 4 }
-            ]
+    namedChangedHandler = (event, id) => {
+
+        const personIndex = this.state.persons.findIndex(p => {
+            return p.id === id;
         });
+
+        const person = {...this.state.persons[personIndex] }; // copy into new object as to not mutate state directly
+        person.name = event.target.value;
+
+        const people = [...this.state.persons]; // copy of collection rather than original
+        people[personIndex] = person;
+
+        this.setState({ persons: people });
     }
 
     deletePersonHandler = (personIndex) => {
@@ -54,9 +59,13 @@ class App extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                        return <Person key={person.id} name={person.name} age={person.age} click={() => this.deletePersonHandler(index)}/>;
+                        return <Person key={person.id}
+                            name={person.name}
+                            age={person.age}
+                            changed={(event) => this.namedChangedHandler(event, person.id)}
+                            click={() => this.deletePersonHandler(index)} />;
                     })}
-            </div>);
+                </div>);
         }
 
         return (
