@@ -46,7 +46,8 @@ class App extends Component {
     render() {
 
         const style = {
-            backgroundColor: 'white',
+            backgroundColor: 'green',
+            color: 'white',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
@@ -66,13 +67,16 @@ class App extends Component {
                             click={() => this.deletePersonHandler(index)} />;
                     })}
                 </div>);
-        }
+
+                style.backgroundColor = 'red';
+                    
+                }
 
         return (
             <div className="App">
                 <h1>Hi, I'm a react App</h1>
                 <p>This is really working</p>
-                <button style={style} onClick={this.togglePersonHandler}>Switch</button>
+                <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
                 {persons}
             </div>
         );
