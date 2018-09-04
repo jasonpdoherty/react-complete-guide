@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from "./Person/person"
+import Person from "../Components/Persons/Person/person"
 
 class App extends Component {
     state = {
@@ -28,7 +28,6 @@ class App extends Component {
     }
 
     deletePersonHandler = (personIndex) => {
-
         //const persons = this.state.persons; // references state directly which will mutate it - WRONG!!
         //const persons = this.state.persons.slice(); // pre ES6 fix to this issue
 
