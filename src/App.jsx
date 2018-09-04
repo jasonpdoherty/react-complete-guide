@@ -45,20 +45,8 @@ class App extends Component {
 
     render() {
 
-        const style = {
-            backgroundColor: 'green',
-            color: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer',
-            ':hover': {
-                backgroundColor: 'lightgreen',
-                color: 'black'
-            }
-        };
-
         let persons = null;
+        let btnClass = '';
 
         if (this.state.showPersons) {
             persons = (
@@ -71,8 +59,7 @@ class App extends Component {
                             click={() => this.deletePersonHandler(index)} />;
                     })}
                 </div>);
-
-            style.backgroundColor = 'red';
+                btnClass = classes.red;
         }
 
         let assignedClasses = [];
@@ -88,7 +75,7 @@ class App extends Component {
             <div className={classes.App}>
                 <h1>Hi, I'm a react App</h1>
                 <p className={assignedClasses.join(' ')}>This is really working</p>
-                <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+                <button className={btnClass} onClick={this.togglePersonHandler}>Toggle Persons</button>
                 {persons}
             </div>
         );
