@@ -49,6 +49,7 @@ class Persons extends Component {
         return this.props.persons.map((person, index) => {
             return <Person key={person.id}
                 name={person.name}
+                position={index}
                 age={person.age}
                 changed={(event) => this.props.changed(event, person.id)}
                 click={() => this.props.clicked(index)} />;
