@@ -4,20 +4,17 @@ import Persons from "../Components/Persons/Persons"
 import Cockpit from '../Components/Cockpit/cockpit';
 
 class App extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         console.log("App.jsx - inside constructor", props);
     }
 
-    componentWillMount()
-    {
+    componentWillMount() {
         console.log("App.jsx - inside componentWillMount");
 
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         console.log("App.jsx - inside componentDidMount");
 
     }
@@ -28,7 +25,8 @@ class App extends Component {
             { id: 2, name: 'Jack', age: 7 },
             { id: 3, name: 'Harry', age: 4 }
         ],
-        showPersons: false
+        showPersons: false,
+        toggleClicked: 0
     };
 
     namedChangedHandler = (event, id) => {
@@ -58,7 +56,9 @@ class App extends Component {
 
     togglePersonHandler = () => {
         const currentShowing = this.state.showPersons;
-        this.setState({ showPersons: !currentShowing });
+        this.setState((prevState, props) => {
+            return { showPersons: !currentShowing, toggleClicked: prevState.toggleClicked + 1 }; // SAFEST WAY TO USE PREVIOUS STATE
+        });
     }
 
     render() {
